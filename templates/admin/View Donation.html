@@ -1,0 +1,89 @@
+{% extends 'admin/Home2.html' %}
+{% block body %}
+
+<head>
+  <script>
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+  </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+
+<form name="form1" method="post" action="/admin_view_donations_search#abc">
+  <table  class="table-borderless table" width="200" border="1">
+    <tr>
+      <td>From date</td>
+      <td><label for="textfield"></label>
+      <input required class="form-control" type="date" name="textfield" id="textfield"></td>
+      <td>To date</td>
+      <td><label for="textfield2"></label>
+      <input type="date" class="form-control" name="textfield2" id="textfield2"></td>
+      <td><input class="btn btn-secondary"  required type="submit" name="button" id="button" value="Search"></td>
+    </tr>
+  </table>
+  <div id="printableArea">
+  <p>Guest donations</p>
+  <table class="table-bordered table" width="200" border="1">
+    <tr>
+      <td>sl no.</td>
+      <td>User details</td>
+      <td>Account no.</td>
+      <td>Amount</td>
+      <td>Date</td>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>&nbsp;{{ i['name'] }},<br>{{ i['email'] }}</td>
+      <td>&nbsp;{{ i['account_no'] }}</td>
+      <td>&nbsp;{{ i['amount'] }}</td>
+      <td>&nbsp;{{ i['date'] }}</td>
+    </tr>
+      {% endfor %}
+
+
+
+  </table>
+  </div>
+  <button type="button" onclick="printDiv('printableArea')" class="btn btn-primary"  ><i class="fa fa-print"></i></button>
+  <div id="printableArea1">
+  <p>Public Donation</p>
+  <table class="table table-bordered" width="200" border="1">
+  <tr>
+    <td>sl no.</td>
+    <td>Account details</td>
+    <td>Amount</td>
+    <td>Date</td>
+  </tr>
+      {% for i in data1 %}
+  <tr>
+    <td>&nbsp;{{ loop.index }}</td>
+    <td>&nbsp;{{ i['account_no'] }}</td>
+      <td>&nbsp;{{ i['amount'] }}</td>
+      <td>&nbsp;{{ i['date'] }}</td>
+  </tr>
+
+      {% endfor %}
+
+</table>
+  </div>
+  <button type="button" onclick="printDiv('printableArea1')" class="btn btn-primary"  ><i class="fa fa-print"></i></button>
+  <br>
+  <br>
+  <br>
+</form>
+{% endblock %}
+</body>
+</html>
