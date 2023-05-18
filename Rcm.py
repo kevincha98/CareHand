@@ -1508,5 +1508,5 @@ def public_view_notification_search():
     return render_template('View Notification.html', data=res)
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0',port=4000)
+    app.run(debug=True,host='*',port=4000)
 
