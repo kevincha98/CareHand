@@ -3,7 +3,12 @@ import mysql.connector
 
 class Db:
     def __init__(self):
-        self.cnx = mysql.connector.connect(hostname='carehand.mysql.database.azure.com',username='carehand',password='admin@123',ssl-mode=require,ssl='Digi.crt.pem',database='rcm')
+        self.cnx = mysql.connector.connect(user="carehand",
+    password="Admin@123",
+    host="carehand.mysql.database.azure.com",
+    port=3306,
+    database="rcm",
+   )
         self.cur = self.cnx.cursor(dictionary=True)
 # import psycopg2
 
